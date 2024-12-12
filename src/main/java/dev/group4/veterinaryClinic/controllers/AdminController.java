@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admins")
+@RequestMapping(path="${api-endpoint}/admins")
 public class AdminController {
 
     @Autowired
@@ -45,10 +45,8 @@ public class AdminController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAdmin(@PathVariable int id) {
-        if (adminService.getAdminById(id).isPresent()) {
-            adminService.deleteAdminById(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        adminService.getAdminById(id);
+        adminService.deleteAdminById(id);
+    return ResponseEntity.noContent().build();
     }
 }
